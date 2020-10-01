@@ -8,6 +8,7 @@ import me.ichmagomaskekse.de.files.Filer;
 public class Properties {
 	
 	private BukkitRunnable updater = null;
+	private int updateDelay = 10; //Sekunden
 	
 	public static String motd, joinMessage, quitMessage;
 	public static int fakeSlots;
@@ -23,9 +24,13 @@ public class Properties {
 				update();
 			}
 		};
-		updater.runTaskTimer(pl, 0, 10*20);
+		updater.runTaskTimer(pl, 0, updateDelay*20);
 	}
 	
+	/*
+	 * Aktualisiert alle Variablen(Fields).
+	 * Die Methode MUSS immer auf dem neusten Stand gehalten werden!
+	 */
 	public void update() {
 		motd = Filer.readString(Filer.config_path, "motd").replace("$NEWLINE$", "\n");
 		joinMessage = Filer.readString(Filer.config_path, "joinMessage");
