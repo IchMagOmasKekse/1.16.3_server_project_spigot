@@ -1,0 +1,6 @@
+name: ServerSystem
+version: 1.0
+author: IchMagOmasKekse
+
+main: me.ichmagomaskekse.de.ServerSystem
+commands:
