@@ -1,5 +1,6 @@
 package me.ichmagomaskekse.de.properties;
 
+import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.ichmagomaskekse.de.ServerSystem;
@@ -10,9 +11,11 @@ public class Properties {
 	private BukkitRunnable updater = null;
 	private int updateDelay = 10; //Sekunden
 	
-	public static String motd, joinMessage, quitMessage;
+	/* Alle Einstellungen die in dem Plugin benötigt werden */
+	public static String motd, joinMessage, quitMessage, noPermission;
 	public static int fakeSlots;
 	public static boolean activateFakeSlots;
+	public static Location lobby_spawn;
 	
 	public Properties(ServerSystem pl) {
 		update();
@@ -35,8 +38,13 @@ public class Properties {
 		motd = Filer.readString(Filer.config_path, "motd").replace("$NEWLINE$", "\n");
 		joinMessage = Filer.readString(Filer.config_path, "joinMessage");
 		quitMessage = Filer.readString(Filer.config_path, "quitMessage");
+		noPermission = Filer.readString(Filer.config_path, "noPermission");
+		
 		fakeSlots = Filer.readInteger(Filer.config_path, "fakeSlots");
+		
 		activateFakeSlots = Filer.readBoolean(Filer.config_path, "activateFakeSlots");
+		
+		lobby_spawn = Filer.getLocation(Filer.lobby_path, "Spawn");
 	}
 	
 }

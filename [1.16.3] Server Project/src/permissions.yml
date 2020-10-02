@@ -1,0 +1,8 @@
+#Alle Commands aus diesem Plugin mit passender Permission
+command: permission
+#Lobby-Commands
+- lobby: server.lobby.teleport
+- setlobby: server.lobby.set
+#Money-Commands
+- money: server.money
+- money: server.money.help

@@ -6,3 +6,4 @@ fakeSlots: 30
 activateFakeSlots: true
 joinMessage: ' &a&l+ &7$USERNAME$'
 quitMessage: ' &c&l- &7$USERNAME$'
+noPermission: '&cDu hast kein Recht dazu!'

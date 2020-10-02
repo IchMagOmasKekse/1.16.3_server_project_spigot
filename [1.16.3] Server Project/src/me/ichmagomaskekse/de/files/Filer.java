@@ -15,9 +15,11 @@ public class Filer {
 	public static final String root_dir = "ServerSystem";
 	public static String config_path = "plugins/"+root_dir+"/config.yml";
 	public static String lobby_path = "plugins/"+root_dir+"/lobby_properties.yml";
+	public static String permissions_path = "plugins/"+root_dir+"/permissions.yml";
 	
 	public Filer(boolean overwrite_config) {
 		createConfig(overwrite_config);
+		ServerSystem.getInstance().saveResource("permissions.yml", true);
 	}
 	
 	public static Location getLocation(String file_path, String categoryName) {

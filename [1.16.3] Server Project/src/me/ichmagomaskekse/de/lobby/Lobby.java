@@ -13,7 +13,6 @@ import me.ichmagomaskekse.de.properties.Properties;
 
 public class Lobby implements Listener {
 	
-	public static Location spawn_location = null;
 	
 	public Lobby(ServerSystem pl) {
 		pl.getServer().getPluginManager().registerEvents(this, pl);
@@ -30,7 +29,7 @@ public class Lobby implements Listener {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
-		if(spawn_location != null) e.getPlayer().teleport(spawn_location);
+		if(Properties.lobby_spawn != null) e.getPlayer().teleport(Properties.lobby_spawn);
 		else ServerSystem.broadcastMessage(true, "Der Lobby-Spawn wurde noch nicht gesetzt!");
 		e.setJoinMessage(Properties.joinMessage.replace("$USERNAME$", e.getPlayer().getName()));
 	}

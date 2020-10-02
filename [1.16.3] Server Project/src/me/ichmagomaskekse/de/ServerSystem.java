@@ -1,11 +1,16 @@
 package me.ichmagomaskekse.de;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.ichmagomaskekse.de.files.Filer;
 import me.ichmagomaskekse.de.lobby.Lobby;
+import me.ichmagomaskekse.de.lobby.commands.LobbyCommands;
+import me.ichmagomaskekse.de.money.AccountManager;
+import me.ichmagomaskekse.de.money.MoneyListener;
+import me.ichmagomaskekse.de.money.commands.MoneyCommands;
 import me.ichmagomaskekse.de.motd.MOTDManager;
 import me.ichmagomaskekse.de.properties.Properties;
 
@@ -29,6 +34,9 @@ public class ServerSystem extends JavaPlugin {
 		
 		this.getLogger().info("ServerSystem ist startklar!");
 		broadcastMessage(true, "ServerSystem ist Startklar!");
+		AccountManager.addMoney(Bukkit.getPlayer("IchMagOmasKekse").getUniqueId(), 12);
+		broadcastMessage(true, "Dein Kontostand: "+AccountManager.getMoney(Bukkit.getPlayer("IchMagOmasKekse").getUniqueId()));
+		
 		super.onEnable();
 	}
 	
@@ -52,6 +60,11 @@ public class ServerSystem extends JavaPlugin {
 		lobby = new Lobby(this);
 		
 		new MOTDManager(this);
+		new MoneyListener(this);
+		
+		this.getCommand("lobby").setExecutor(new LobbyCommands());
+		this.getCommand("setlobby").setExecutor(new LobbyCommands());
+		this.getCommand("money").setExecutor(new MoneyCommands());
 	}
 	
 	public static void broadcastMessage(boolean onlyOps, String... s) {
@@ -61,6 +74,12 @@ public class ServerSystem extends JavaPlugin {
 				else p.sendMessage(prefix+msg);
 			}
 		}
+	}
+	
+	public static boolean hasPermission(CommandSender sender, String permission) {
+		if(sender.hasPermission(permission)) return true;
+		else sender.sendMessage(ServerSystem.prefix+Properties.noPermission);
+		return false;
 	}
 	
 }

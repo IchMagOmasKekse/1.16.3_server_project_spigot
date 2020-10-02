@@ -4,3 +4,11 @@ author: IchMagOmasKekse
 
 main: me.ichmagomaskekse.de.ServerSystem
 commands:
+#Lobby-Commands
+  lobby:
+    description: 'Teleports you to lobby spawn'
+  setlobby:
+    description: 'Sets the lobby spawn'
+#Money-Commands
+  money:
+    description: 'Maincommand for the money system. Use /money help for help'
