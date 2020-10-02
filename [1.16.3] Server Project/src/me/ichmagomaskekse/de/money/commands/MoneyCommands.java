@@ -26,6 +26,8 @@ public class MoneyCommands implements CommandExecutor {
 		case 1:
 			if(args[0].equalsIgnoreCase("help") && hasPermission(sender, "server.money.help")) {
 				sendCommandInfo(sender);
+			}else if(PlayerAtlas.getUUID(args[0]) != null && hasPermission(sender, "server.money.help")) {
+				sendCommandInfo(sender);
 			}
 			break;
 		default:
