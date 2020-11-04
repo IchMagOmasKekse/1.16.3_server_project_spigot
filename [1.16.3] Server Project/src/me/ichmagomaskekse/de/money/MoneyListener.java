@@ -15,7 +15,7 @@ public class MoneyListener implements Listener {
 	
 	
 	public MoneyListener(ServerSystem pl) {
-		pl.getServer().getPluginManager().registerEvents(this, pl);
+		//pl.getServer().getPluginManager().registerEvents(this, pl);
 	}
 	
 	@EventHandler

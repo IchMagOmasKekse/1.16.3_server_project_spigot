@@ -65,6 +65,25 @@ public class Filer {
 			return false;
 		}
 	}
+	public static boolean setSouls(int souls) {
+		File file = new File(lobby_path);
+		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+		
+		cfg.set("Souls", souls);
+		
+		try {
+			cfg.save(file);
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static int getSouls() {
+		File file = new File(lobby_path);
+		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+		return cfg.getInt("Souls");
+	}
 	
 	/*
 	 * Liest einen String aus einer Datei und ersetzt & mit §

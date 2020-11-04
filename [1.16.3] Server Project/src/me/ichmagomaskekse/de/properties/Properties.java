@@ -12,8 +12,8 @@ public class Properties {
 	private int updateDelay = 10; //Sekunden
 	
 	/* Alle Einstellungen die in dem Plugin benötigt werden */
-	public static String motd, joinMessage, quitMessage, noPermission;
-	public static int fakeSlots;
+	public static String motd, joinMessage, quitMessage, noPermission, money_symbol;
+	public static int fakeSlots, moneyMinimum, moneyMaximum;
 	public static boolean activateFakeSlots;
 	public static Location lobby_spawn;
 	
@@ -39,8 +39,11 @@ public class Properties {
 		joinMessage = Filer.readString(Filer.config_path, "joinMessage");
 		quitMessage = Filer.readString(Filer.config_path, "quitMessage");
 		noPermission = Filer.readString(Filer.config_path, "noPermission");
+		money_symbol = Filer.readString(Filer.config_path, "moneySymbol");
 		
 		fakeSlots = Filer.readInteger(Filer.config_path, "fakeSlots");
+		moneyMinimum = Filer.readInteger(Filer.config_path, "moneyMinimum");
+		moneyMaximum = Filer.readInteger(Filer.config_path, "moneyMaximum");
 		
 		activateFakeSlots = Filer.readBoolean(Filer.config_path, "activateFakeSlots");
 		

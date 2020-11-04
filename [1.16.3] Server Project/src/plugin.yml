@@ -1,6 +1,7 @@
 name: ServerSystem
 version: 1.0
 author: IchMagOmasKekse
+api-version: 1.16
 
 main: me.ichmagomaskekse.de.ServerSystem
 commands:
@@ -12,3 +13,6 @@ commands:
 #Money-Commands
   money:
     description: 'Maincommand for the money system. Use /money help for help'
+#Darkforge-Commands
+  darkforge:
+    description: 'Maincommand for the darkforge system. Use /darkforge to get a creator for creating a darkforge block'

@@ -5,4 +5,10 @@ command: permission
 - setlobby: server.lobby.set
 #Money-Commands
 - money: server.money
-- money: server.money.help
+- money help: server.money.help
+- money [Player]: server.money.other
+- money add [Player]: server.money.add
+- money remove [Player]: server.money.remove
+- money send [Player]: server.money.send
+- money set [Player]: server.money.set
+- darkforge: server.darkforge.create

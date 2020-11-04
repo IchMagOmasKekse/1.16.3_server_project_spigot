@@ -1,0 +1,24 @@
+Name: Beispiel Animation
+ID: 0
+Steps: 3
+Step 1:
+  Speed: 1
+  Material: STONE
+  Location:
+    XOffset: 0
+    YOffset: 1
+    ZOffset: 0
+Step 2:
+  Speed: 1
+  Material: STONE
+  Location:
+    XOffset: 0
+    YOffset: 2
+    ZOffset: 0
+Step 3:
+  Speed: 1
+  Material: STONE
+  Location:
+    XOffset: 0
+    YOffset: 3
+    ZOffset: 0

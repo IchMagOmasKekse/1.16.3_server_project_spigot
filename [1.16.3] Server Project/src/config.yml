@@ -1,9 +1,12 @@
 #Replacements:
 # $NEWLINE$ = Schreiben in einer neuen Zeile
 # $USERNAME$ = Spielername
-motd: '&7          Ein Dev-Server von &6IchMagOmasKekse $NEWLINE$&7                    Spigot-Version 1.16.3'
+motd: '&7          Tritt bei und spiele ยง5Figth The Dark&7! $NEWLINE$&7                    &CEinzelspieler-BETA'
 fakeSlots: 30
 activateFakeSlots: true
 joinMessage: ' &a&l+ &7$USERNAME$'
 quitMessage: ' &c&l- &7$USERNAME$'
 noPermission: '&cDu hast kein Recht dazu!'
+moneySymbol: 'C'
+moneyMinimum: -100
+moneyMaximum: 100

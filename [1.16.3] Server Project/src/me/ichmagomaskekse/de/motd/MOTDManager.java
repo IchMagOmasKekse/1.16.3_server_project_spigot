@@ -9,6 +9,7 @@ import me.ichmagomaskekse.de.properties.Properties;
 
 public class MOTDManager implements Listener {
 	
+	
 	public MOTDManager(ServerSystem pl) {
 		pl.getServer().getPluginManager().registerEvents(this, pl);
 	}
