@@ -74,7 +74,7 @@ public class DarkforgeManager implements Listener {
 					/* Der Spieler versucht zu aktualisieren */
 					e.setCancelled(true);
 					if(e.getCurrentItem().getItemMeta().hasLore() && e.getCurrentItem().getItemMeta().getLore().contains("§cNicht genug §bSeelen§c!") == false) {
-						
+						ForgerInv.possibilities.remove(inventories.get((Player)e.getWhoClicked()).getItemToEnchant());
 						if(inventories.get(((Player)e.getWhoClicked())).refreshEnchants(false))
 							inventories.get(((Player)e.getWhoClicked())).useSouls(inventories.get(((Player)e.getWhoClicked())).getRefreshCost());
 						
@@ -158,14 +158,6 @@ public class DarkforgeManager implements Listener {
 					e.getWhoClicked().getWorld().playSound(inventories.get(((Player)e.getWhoClicked())).dforge.getLocation().add(0.5,0,0.5), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 6f, -3f);
 					inventories.get(e.getWhoClicked()).setItemToEnchant(player_item);
 //			e.getWhoClicked().closeInventory();
-				}else if(e.getRawSlot() == 0) {
-					/* Wenn der Spieler sein Item zum Verzaubern reingelegt hat,
-					 * sollen neue Entchantments gewürfelt werden */
-					if(inventories.get(e.getWhoClicked()).getItemToEnchant() != null &&
-							inventories.get(e.getWhoClicked()).getItemToEnchant().getType().isBlock() == false) {
-						inventories.get(e.getWhoClicked()).refreshEnchants(true);
-					}
-
 				}
 			}
 		}

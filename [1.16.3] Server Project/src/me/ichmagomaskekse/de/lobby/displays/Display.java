@@ -44,6 +44,12 @@ public abstract class Display {
 	
 	public abstract void update();
 	
+	public void updateText(String text) {
+		this.text = text;
+		this.current_text = text;
+		display.setCustomName(current_text);
+	}
+	
 	public void hide() {
 		display.setCustomNameVisible(false);
 	}
@@ -91,6 +97,10 @@ public abstract class Display {
 			location.add(usedXOffset, usedYOffset, usedZOffset);
 		}
 		display.teleport(location);
+	}
+	
+	public ArmorStand getDisplay() {
+		return display;
 	}
 	
 }

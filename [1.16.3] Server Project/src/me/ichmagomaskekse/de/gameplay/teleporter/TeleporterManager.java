@@ -4,42 +4,35 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.ichmagomaskekse.de.ServerSystem;
 
-public class TeleporterManager {
+public class TeleporterManager implements Listener {
 	
 	private static BukkitRunnable timer = null;
-	private static HashMap<Integer, Teleporter> teleporters = new HashMap<Integer, Teleporter>();
+	private static HashMap<Float, Teleporter> teleporters = new HashMap<Float, Teleporter>();
+
 	
 	public TeleporterManager() {
-		LobbyToBattlefieldTeleporter lb = new LobbyToBattlefieldTeleporter(
-				0, //ID
-				"§7-> §b§nSafehouse §7<-", //Name
-				1, //Ziel
-				new Location(Bukkit.getWorld("world"), 0, 96, 14, 0, -6) //Spot
-				);
+		ServerSystem.getInstance().getServer().getPluginManager().registerEvents(this, ServerSystem.getInstance());
 		
-		registrateNewTeleporter(lb);
+		WerkstattTeleporter wt = new WerkstattTeleporter(new Location(Bukkit.getWorld("world"), 0, 96, 14, 0, -6));
+		registrateNewTeleporter(wt);
 		
-		BattlefieldToLobbyTeleporter bl = new BattlefieldToLobbyTeleporter(
-				1, //ID
-				"§7-> §b§nWerkstatt §7<-", //Name
-				0, //Ziel
-				new Location(Bukkit.getWorld("world"), 230, 43, 58, -87, 26) //Spot
-				);
+		SafehouseTeleporter st = new SafehouseTeleporter(new Location(Bukkit.getWorld("world"), 230, 43, 58, -87, 26));
+		registrateNewTeleporter(st);
 		
-		registrateNewTeleporter(bl);
+		GeneratorTeleporter gt = new GeneratorTeleporter(new Location(Bukkit.getWorld("world"), 184, 32, 54, -87, 26));
+		registrateNewTeleporter(gt);
 		
-		BossToLobbyTeleporter bbl = new BossToLobbyTeleporter(
-				2, //ID
-				"§7-> §c§nFlüchten §7<-", //Name
-				0, //Ziel
-				new Location(Bukkit.getWorld("world"), 184, 32, 54, -87, 26) //Spot
-				);
-		
-		registrateNewTeleporter(bbl);
+		TestfieldTeleporter tt = new TestfieldTeleporter(new Location(Bukkit.getWorld("world"), 326, 33, 54, 180, 3.2f));
+		registrateNewTeleporter(tt);
 		
 		timer = new BukkitRunnable() {
 			@Override public void run() {
@@ -51,20 +44,33 @@ public class TeleporterManager {
 	
 	public static void disable() {
 		if(teleporters.isEmpty() == false) {
-			for(int i : teleporters.keySet()) {
+			for(float i : teleporters.keySet()) {
 				teleporters.get(i).shutdown();
 			}
 		}
 	}
 	
-	public static Teleporter getTeleporterById(int id) {
-		return teleporters.get(id);
+	@EventHandler
+	public void onInteract(PlayerInteractAtEntityEvent e) {
+		if(e.getRightClicked() instanceof ArmorStand) {
+			for(float f : teleporters.keySet()) {
+				Teleporter t = teleporters.get(f);
+				if(e.getRightClicked() == t.getDisplay().getDisplay()) {
+					t.nextDestiny();
+					e.getPlayer().getWorld().playSound(e.getRightClicked().getLocation(), Sound.UI_BUTTON_CLICK, 6f, 0f);
+				}
+			}
+		}
+	}
+
+	public static Teleporter getTeleporterById(float address) {
+		return teleporters.get(address);
 		
 	}
 	
 	private static void updateTeleporters() {
 		if(teleporters.isEmpty() == false) {
-			for(int i : teleporters.keySet()) {
+			for(float i : teleporters.keySet()) {
 				teleporters.get(i).updatePassengers();
 				teleporters.get(i).checkVoltage();
 				teleporters.get(i).tick();
@@ -81,13 +87,13 @@ public class TeleporterManager {
 	}
 	
 	public static boolean registrateNewTeleporter(Teleporter teleporter) {
-		if(teleporters.containsKey(teleporter.id)) return false;
-		else teleporters.put(teleporter.id, teleporter);
+		if(teleporters.containsKey(teleporter.getAddress())) return false;
+		else teleporters.put(teleporter.getAddress(), teleporter);
 		return true;
 	}
-	public static boolean unregisterTeleporter(int id) {
-		if(teleporters.containsKey(id) == false) return false;
-		else teleporters.remove(id);
+	public static boolean unregisterTeleporter(float address) {
+		if(teleporters.containsKey(address) == false) return false;
+		else teleporters.remove(address);
 		return true;
 	}
 	

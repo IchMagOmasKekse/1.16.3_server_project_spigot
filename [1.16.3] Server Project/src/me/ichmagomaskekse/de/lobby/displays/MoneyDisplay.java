@@ -17,7 +17,7 @@ public class MoneyDisplay extends Display {
 
 	@Override
 	public void update() {
-		replaceParamsInDisplayText("{COINS}", AccountManager.getMoney(ServerSystem.lobby.player.getUniqueId())+Properties.money_symbol);
+		if(ServerSystem.lobby != null && ServerSystem.lobby.player != null) replaceParamsInDisplayText("{COINS}", AccountManager.getMoney(ServerSystem.lobby.player.getUniqueId())+Properties.money_symbol);
 	}
 	
 }

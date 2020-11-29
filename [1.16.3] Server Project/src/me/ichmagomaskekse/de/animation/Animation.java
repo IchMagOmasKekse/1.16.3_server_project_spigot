@@ -38,6 +38,10 @@ public class Animation {
 		File file = new File("plugins/"+Filer.root_dir+"/Animations/"+filename+".anima");
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 		
+		if(file.exists() == false) {
+			isFinished = true;
+			return;
+		}
 		
 		anima_name = cfg.getString("Name");
 		id = cfg.getInt("ID");
@@ -57,7 +61,8 @@ public class Animation {
 	}
 	
 	public void play() {
-		if(isFinished == false) {			
+		if(step_list.isEmpty()) isFinished = true;
+		else if(isFinished == false) {			
 			isPlaying = true;
 			isResetted = false;
 			

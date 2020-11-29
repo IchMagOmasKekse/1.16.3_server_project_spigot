@@ -4,6 +4,7 @@ import org.bukkit.Material;
 
 public enum DarkEnchant {
 	
+	UNDEFINED("undefined", "UNDEFINIERT", 1, 1, -1, "", Material.BEDROCK),
 	PICKPOCKET("pickpocket", "§7Seelenfresser", 1, 10, 0, "§9Seelenfresser", Material.DIAMOND),
 	DARKNESS("darkness", "§8Dunkelheit", 1, 3, 1, "§9Dunkelheit", Material.GILDED_BLACKSTONE),
 	LOYALITY("loyality", "§6Treue", 1, 1, 2, "§9Treue", Material.TOTEM_OF_UNDYING),

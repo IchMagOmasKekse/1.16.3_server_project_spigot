@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.ichmagomaskekse.de.files.Filer;
+import me.ichmagomaskekse.de.gameplay.mechanics.CoinManager;
 import me.ichmagomaskekse.de.gameplay.teleporter.TeleporterManager;
 import me.ichmagomaskekse.de.lobby.Lobby;
 import me.ichmagomaskekse.de.lobby.commands.LobbyCommands;
@@ -27,9 +28,10 @@ public class ServerSystem extends JavaPlugin {
 		return pl;
 	}
 	
-	public static String prefix = "§5Fight The Darkness §7| ";
+	public static String prefix = "§5Fight The Dark §7| ";
 	public static Lobby lobby = null;
 	public static DarkforgeManager darkforge_manager = null;
+	public static CoinManager coinManager = null;
 	public static boolean debug = false;
 	
 	@Override
@@ -48,8 +50,8 @@ public class ServerSystem extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		darkforge_manager.closeAll();
 		DisplayManager.removeAll();
+		darkforge_manager.closeAll();
 		TeleporterManager.disable();
 		EffectHandler.stopAll();
 		super.onDisable();
@@ -67,20 +69,23 @@ public class ServerSystem extends JavaPlugin {
 	}
 	
 	public void postInit() {
+		new DisplayManager();
 		lobby = new Lobby(this);
 		
 		new MOTDManager(this);
 		new MoneyListener(this);
 		
-		new DisplayManager();
 		
 		darkforge_manager = new DarkforgeManager();
+		
 		new EnchantHandler();
 		
 		this.getCommand("lobby").setExecutor(new LobbyCommands());
 		this.getCommand("setlobby").setExecutor(new LobbyCommands());
 		this.getCommand("money").setExecutor(new MoneyCommands());
 		this.getCommand("darkforge").setExecutor(new DarkforgeCommands());
+		
+		coinManager = new CoinManager();
 	}
 	
 	public static void broadcastMessage(boolean onlyOps, String... s) {

@@ -5,18 +5,17 @@ import org.bukkit.Location;
 import me.ichmagomaskekse.de.animation.Animation;
 import me.ichmagomaskekse.de.lobby.displays.DisplayManager;
 
-public class BattlefieldToLobbyTeleporter extends Teleporter {
-
+public class SafehouseTeleporter extends Teleporter {
 	
 	
-	
-	public BattlefieldToLobbyTeleporter(int id, String name, int destiny_id, Location spot) {
-		super(id, name, destiny_id, spot);
+	public SafehouseTeleporter(Location spot) {
+		super(TeleporterType.SAFEHOUSE, spot);
 		
 		destiny_id = 0;
 		isTeleporting = false;
-
 		animation = new Animation("animation_V16N94", spot);
+
+		
 //		display.setPositionToBottum();
 		DisplayManager.registerDisplay(display);
 	}

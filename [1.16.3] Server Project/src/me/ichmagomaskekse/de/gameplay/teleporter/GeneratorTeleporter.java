@@ -5,15 +5,15 @@ import org.bukkit.Location;
 import me.ichmagomaskekse.de.animation.Animation;
 import me.ichmagomaskekse.de.lobby.displays.DisplayManager;
 
-public class LobbyToBattlefieldTeleporter extends Teleporter {
+public class GeneratorTeleporter extends Teleporter {
 	
 	
-	public LobbyToBattlefieldTeleporter(int id, String name, int destiny_id, Location spot) {
-		super(id, name, destiny_id, spot);
+	public GeneratorTeleporter(Location spot) {
+		super(TeleporterType.GENERATOR, spot);
 		
 		destiny_id = 1;
 		isTeleporting = false;
-		animation = new Animation("animation_5k51R6", spot);
+		animation = new Animation("animation_8k9aUJ", spot);
 
 	
 //		display.setPositionToBottum();

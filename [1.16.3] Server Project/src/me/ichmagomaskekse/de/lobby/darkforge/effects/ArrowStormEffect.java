@@ -10,6 +10,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -24,7 +25,7 @@ public class ArrowStormEffect extends Effect {
 	final ArrayList<Entity> shooted = new ArrayList<Entity>();
 	private Sound ice_break_sound = Sound.BLOCK_GLASS_BREAK;
 	int amount_projectiles = 11;
-	final Circle circle = new Circle(5);
+	final Circle circle = new Circle(10);
 	
 	public ArrowStormEffect(LivingEntity damager, LivingEntity target, ItemStack weapon) {
 		super(EffectType.ARROW_STORM, damager, target, weapon);
@@ -45,8 +46,8 @@ public class ArrowStormEffect extends Effect {
 					/* Wenn der Effekt gesartet wurde */
 					if(projectiles.isEmpty() == false) for(Entity s : projectiles)s.remove();
 					
-					summonProjectiles();
-//					searchNewProjectile(20, 4, 20);
+//					summonProjectiles();
+					searchNewProjectile(5, 4, 5);
 				}else if(durationLeft <= 0 || target.isDead()) {
 					
 					/* Wenn der Effekt die Wirkung verliert */
@@ -67,9 +68,9 @@ public class ArrowStormEffect extends Effect {
 					return;
 				}else {
 					/* Während der Effekt wirkt */
-//					if(projectiles.size() < amount_projectiles) {
-//						searchNewProjectile(1, 3, 1);
-//					}
+					if(projectiles.size() < amount_projectiles) {
+						searchNewProjectile(1, 3, 1);
+					}
 					
 					double angle = (360 / projectiles.size());
 					int index = 1;
@@ -88,7 +89,7 @@ public class ArrowStormEffect extends Effect {
 						p.setFireTicks(10);
 						index++;
 					}
-					offset+=0.01d;
+					offset+=0.03d;
 					if(offset >= 25.0d) offset = 0.0d;
 					durationLeft-=1;
 					
@@ -118,9 +119,9 @@ public class ArrowStormEffect extends Effect {
 	
 	public void searchNewProjectile(double x, double y, double z) {
 		for(Entity entity : target.getNearbyEntities(x, y, z)) {
-			if(entity instanceof Entity && shooted.contains(entity) == false && entity instanceof Arrow == false) {
+			if(entity instanceof Entity && shooted.contains(entity) == false && entity instanceof Arrow == false && entity instanceof Player == false) {
 				projectiles.add(entity);
-				circle.durchmesser = (projectiles.size() / (amount_projectiles / 0.5));
+				circle.durchmesser = (projectiles.size() / (projectiles.size() * 0.25));
 				circle.radius =  circle.durchmesser / 2;
 				if(projectiles.size() >= amount_projectiles) break;
 			}

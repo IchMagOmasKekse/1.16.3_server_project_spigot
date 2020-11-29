@@ -72,14 +72,7 @@ public class Lobby implements Listener {
 						if(e.getClickedBlock().getLocation().getX() == loc.getX() &&
 								e.getClickedBlock().getLocation().getY() == loc.getY() &&
 								e.getClickedBlock().getLocation().getZ() == loc.getZ() && e.getClickedBlock().getType() == material) {
-
-							if(e.getItem() == null) {
-								e.setCancelled(true);
-								return;
-							}else if(e.getItem().getType().isBlock()) {
-								e.setCancelled(true);
-								return;
-							}
+							
 							if(cooldown.contains(e.getPlayer())) {
 								cooldown.remove(e.getPlayer());
 								return;
@@ -101,8 +94,10 @@ public class Lobby implements Listener {
 	@EventHandler
 	public void onInventoryClose(InventoryCloseEvent e) {
 		if(e.getView().getTitle().equals("§8Dunkelschmiede")) {
-			if(DarkforgeManager.inventories.get(e.getPlayer()).getItemToEnchant() != null)
+			if(DarkforgeManager.inventories.get(e.getPlayer()) != null && 
+					DarkforgeManager.inventories.get(e.getPlayer()).getItemToEnchant() != null)
 				e.getPlayer().getInventory().addItem(DarkforgeManager.inventories.get(e.getPlayer()).getItemToEnchant());
+			DarkforgeManager.inventories.get(e.getPlayer()).cancel();
 			DarkforgeManager.inventories.remove(e.getPlayer());
 		}
 	}

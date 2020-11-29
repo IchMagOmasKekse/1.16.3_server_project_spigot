@@ -14,8 +14,8 @@ public class UniversalDisplay extends Display {
 	@Override
 	public void update() {
 		this.display.setGravity(false);
-		this.display.teleport(location);
+		this.display.teleport(location.clone());
 		this.display.setVelocity(this.static_velocity);
 	}
-
+	
 }

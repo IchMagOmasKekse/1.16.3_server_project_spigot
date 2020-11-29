@@ -1,6 +1,8 @@
 package me.ichmagomaskekse.de.lobby.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,6 +39,9 @@ public class LobbyCommands implements CommandExecutor {
 			case 1:
 				if(cmd.getName().equalsIgnoreCase("lobby") && args[0].equalsIgnoreCase("help") && hasPermission(p, "server.lobby.help")) {
 					sendCommandInfo(p);
+				}else if(cmd.getName().equalsIgnoreCase("lobby") && args[0].equalsIgnoreCase("2") && hasPermission(p, "server.lobby.2")) {
+					World w2 = Bukkit.getWorld("world2");
+					p.teleport(w2.getSpawnLocation());
 				}
 				break;
 			}
